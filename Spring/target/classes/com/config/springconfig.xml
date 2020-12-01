@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd"
+	default-lazy-init="true">
+
+	<!--Constructor Injection of data -->
+	<!-- <import resource="" /> -->
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:/com/service/one.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="student" class="com.bean.Student">
+		<property name="studentid" value="34"></property>
+		<property name="studentname" value="${name} "></property>
+		<property name="addresses">
+			<list>
+				<ref bean="address1"></ref>
+				<ref bean="address2"></ref>
+				<ref bean="address3"></ref>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="address1" class="com.bean.Address" lazy-init="true">
+		<constructor-arg name="city" value="Hyderabad"></constructor-arg>
+		<constructor-arg name="housenumber" value="56A-90"></constructor-arg>
+		<constructor-arg name="streetnumber" value="7G"></constructor-arg>
+	</bean>
+	<bean id="address2" class="com.bean.Address" lazy-init="true">
+		<constructor-arg name="city" value="Chennai"></constructor-arg>
+		<constructor-arg name="housenumber" value="56B-90"></constructor-arg>
+		<constructor-arg name="streetnumber" value="8G"></constructor-arg>
+	</bean>
+	<bean id="address3" class="com.bean.Address">
+		<property name="housenumber" value="789G"></property>
+		<property name="streetnumber" value="9G"></property>
+		<property name="city" value="Hyderabad"></property>
+	</bean>
+</beans> 
+
+
+
